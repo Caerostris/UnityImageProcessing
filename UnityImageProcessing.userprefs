@@ -1,20 +1,22 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="BlobFinder.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Rectangle.cs">
     <Files>
-      <File FileName="BinaryFilter.cs" Line="3" Column="60" />
-      <File FileName="BlobFinder.cs" Line="14" Column="3" />
-      <File FileName="EdgeDetection.cs" Line="1" Column="1" />
-      <File FileName="AssemblyInfo.cs" Line="13" Column="34" />
-      <File FileName="Image.cs" Line="1" Column="1" />
+      <File FileName="../VRCam/Assets/Cardboard/DemoScene/DisableFog.cs" Line="1" Column="1" />
+      <File FileName="../VRCam/Assets/Cardboard/DemoScene/CameraView.cs" Line="75" Column="2" />
+      <File FileName="../../../../Projects/VRCTest/VRCTest/Test.cs" Line="1" Column="1" />
+      <File FileName="../../../../Projects/VRCTest/VRCTest/Rectangle.cs" Line="1" Column="1" />
+      <File FileName="../VRCam/Assets/Cardboard/Editor/CardboardEditor.cs" Line="1" Column="1" />
       <File FileName="BinaryImage.cs" Line="1" Column="1" />
+      <File FileName="EdgeDetection.cs" Line="1" Column="1" />
+      <File FileName="BlobFinder.cs" Line="1" Column="1" />
+      <File FileName="Rectangle.cs" Line="138" Column="12" />
+      <File FileName="ImageObjectScaler.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="UnityImageProcessing" expanded="True">
-            <Node name="BlobFinder.cs" selected="True" />
-          </Node>
+          <Node name="UnityImageProcessing" expanded="True" />
         </State>
       </Pad>
     </Pads>

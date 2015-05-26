@@ -11,15 +11,15 @@ namespace UnityImageProcessing
 
 	public class ImageObjectScaler
 	{
-		private int strokeWidth;
+		private int halfStrokeWidth;
 
 		public int StrokeWidth {
 			get {
-				return strokeWidth * 2;
+				return halfStrokeWidth * 2;
 			}
 
 			set {
-				strokeWidth = (int)Math.Round ((double)Math.Abs (value) / 2, MidpointRounding.AwayFromZero);
+				halfStrokeWidth = (int)Math.Round ((double)Math.Abs (value) / 2, MidpointRounding.AwayFromZero);
 			}
 		}
 
@@ -40,14 +40,14 @@ namespace UnityImageProcessing
 						continue;
 					}
 
-					for(int modX = strokeWidth * (-1); modX < strokeWidth; modX++) {
+					for(int modX = halfStrokeWidth * (-1); modX < halfStrokeWidth; modX++) {
 						int newX = x + modX;
 						if(newX > 0 && newX < image.Width) {
 							newImage.setPixel(newX, y, pixel);
 						}
 					}
 
-					for(int modY = strokeWidth * (-1); modY < strokeWidth; modY++) {
+					for(int modY = halfStrokeWidth * (-1); modY < halfStrokeWidth; modY++) {
 						int newY = y + modY;
 						if(newY > 0 && newY < image.Height) {
 							newImage.setPixel(x, newY, pixel);

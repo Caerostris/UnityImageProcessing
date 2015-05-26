@@ -8,10 +8,32 @@ namespace UnityImageProcessing {
 	using UnityEngine;
 
 	public class Rectangle {
-		int topLeftX;
-		int topLeftY;
-		int bottomRightX;
-		int bottomRightY;
+		private int topLeftX;
+		private int topLeftY;
+		private int bottomRightX;
+		private int bottomRightY;
+		private int strokeWidth = 1;
+		private Color32 strokeColor = new Color32 (255, 0, 0, 1);
+
+		public int StrokeWidth {
+			get {
+				return strokeWidth;
+			}
+
+			set {
+				strokeWidth = value;
+			}
+		}
+
+		public Color32 StrokeColor {
+			get {
+				return strokeColor;
+			}
+
+			set {
+				strokeColor = value;
+			}
+		}
 
 		public int TopLeftX {
 			get {
@@ -65,6 +87,12 @@ namespace UnityImageProcessing {
 			}
 		}
 
+		public int GetSurfaceArea {
+			get {
+				return GetHeight * GetWidth;
+			}
+		}
+
 		public Rectangle(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY) {
 			this.topLeftX = topLeftX;
 			this.topLeftY = topLeftY;
@@ -78,6 +106,42 @@ namespace UnityImageProcessing {
 			}
 
 			return false;
+		}
+
+		public Image drawInPlace(Image image) {
+			// draw upper & lower border
+			for (int x = TopLeftX; x <= bottomRightX; x++) {
+				for(int yShift = 0; yShift < strokeWidth; yShift++) {
+					int upperY = topLeftY + yShift;
+					int lowerY = bottomRightY + yShift;
+
+					if(upperY > 0 && upperY < image.Height) {
+						image.setPixel(x, upperY, strokeColor);
+					}
+
+					if(lowerY > 0 && lowerY < image.Height) {
+						image.setPixel(x, lowerY, strokeColor);
+					}
+				}
+			}
+
+			// draw left & right border
+			for (int y = TopLeftY; y <= bottomRightY; y++) {
+				for(int xShift = 0; xShift < strokeWidth; xShift++) {
+					int upperX = topLeftX + xShift;
+					int lowerX = bottomRightX + xShift;
+					
+					if(upperX > 0 && upperX < image.Width) {
+						image.setPixel(upperX, y, strokeColor);
+					}
+					
+					if(lowerX > 0 && lowerX < image.Width) {
+						image.setPixel(lowerX, y, strokeColor);
+					}
+				}
+			}
+
+			return image;
 		}
 	}
 }
