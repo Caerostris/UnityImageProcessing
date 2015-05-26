@@ -4,7 +4,7 @@
  * Copyright (c) 2015 Keno Schwalb
  */
 
-namespace UnityColorFilters
+namespace UnityImageProcessing
 {
 	/**
 	 * Edge detection algorithm as described in "Edge detection of binary images using the method of masks", Sept. 2000, Bahaa-Eldin et. al

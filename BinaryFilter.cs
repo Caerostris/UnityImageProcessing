@@ -4,7 +4,7 @@
  * Copyright (c) 2015 Keno Schwalb
  */
 
-﻿namespace UnityColorFilters {
+namespace UnityImageProcessing {
 	using UnityEngine;
 
 	public class BinaryFilter {
