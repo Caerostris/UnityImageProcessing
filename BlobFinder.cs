@@ -71,7 +71,7 @@
 			}
 		}
 
-		public Rectangle[] Process(Image image, CameraView cameraView) {
+		public Rectangle[] Process(Image image) {
 			List<Rectangle> rectangles = new List<Rectangle> ();
 
 			// go over all rows
@@ -90,24 +90,20 @@
 					Color32 color = image.getPixel(coordinate.X, coordinate.Y);
 					if(color.r != 0 || color.g != 0 || color.b != 0) {
 						// breadth first search expansion
-						Debug.Log ("Expanding " + coordinate.X + " " + coordinate.Y);
-						Rectangle blob = expandBlob(image, coordinate, cameraView);
+						Rectangle blob = expandBlob(image, coordinate);
 						if(blob != null) {
 							rectangles.Add(blob);
 						}
-						Debug.Log ("Found blob " + blob.TopLeftX + " " + blob.TopLeftY + " " + blob.BottomRightX + " " + blob.BottomRightY + " Size: " + blob.GetWidth + "x" + blob.GetHeight + " checked coordinate " + coordinate.X + " " + coordinate.Y);
 					}
 				}
 			}
 
 			// check if it has minHeight and minWidth
-	//		Debug.Log ("Length before pruning: " + rectangles.Count);
 			rectangles.RemoveAll (blob => blob.GetHeight < minHeight || blob.GetWidth < minWidth);
-	//		Debug.Log ("Length after: " + rectangles.Count);
 			return rectangles.ToArray ();
 		}
 
-		private Rectangle expandBlob(Image image, Coordinate startingPoint, CameraView cameraView) {
+		private Rectangle expandBlob(Image image, Coordinate startingPoint) {
 			Color32[] debImgP = new Color32[image.Pixels.Length];
 			for (int i = 0; i < debImgP.Length; i++) {
 				debImgP [i] = new Color32 (0, 0, 0, 1);
@@ -147,7 +143,6 @@
 
 				pointsToCheck.Clear ();
 				pointsToCheck = newPointsToCheck;
-				cameraView.processedImage = debImg;
 			}
 
 			return blob;
