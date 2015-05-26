@@ -8,9 +8,13 @@ namespace UnityImageProcessing
 {
 	/**
 	 * Edge detection algorithm as described in "Edge detection of binary images using the method of masks", Sept. 2000, Bahaa-Eldin et. al
-	*/
+	 **/
 	public class EdgeDetection
 	{
+		/**
+		 * Apply the edge detection algorithm to a BinaryImage.
+		 * Returns a copy of the image passed as parameter and does not modify the original
+		 **/
 		public static BinaryImage Apply(BinaryImage image) {
 			BinaryImage mask = image.invert ();
 			BinaryImage result;

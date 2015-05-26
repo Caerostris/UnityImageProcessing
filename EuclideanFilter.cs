@@ -8,6 +8,9 @@ namespace UnityImageProcessing {
 	using UnityEngine;
 	using System;
 
+	/**
+	 * A Euclidean color filter
+	 **/
 	public class EuclideanFilter {
 		private short radius;
 		private Color32 center;
@@ -45,7 +48,6 @@ namespace UnityImageProcessing {
 			}
 		}
 
-
 		public short Radius {
 			get {
 				return radius;
@@ -56,11 +58,18 @@ namespace UnityImageProcessing {
 			}
 		}
 
+		/**
+		 * Create a EuclideanFilter
+		 **/
 		public EuclideanFilter(Color32 center, short radius) {
 			this.center = center;
 			this.radius = radius;
 		}
 
+		/**
+		 * Apply the Euclidean filter the given image.
+		 * All transformations will be performed on the original image and no copy will be created
+		 **/
 		public Image ApplyInPlace(Image image) {
 			// for each pixel
 			for (int i = 0; i < image.Pixels.Length; i++) {
@@ -70,6 +79,10 @@ namespace UnityImageProcessing {
 			return image;
 		}
 
+		/**
+		 * Apply the Euclidean filter to the givn image.
+		 * A copy of the image will be created and the original image will not be altered.
+		 **/
 		public Image Apply(Image image) {
 			Color32[] newPixels = new Color32[image.Pixels.Length];
 			

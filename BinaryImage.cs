@@ -6,7 +6,12 @@
 
 namespace UnityImageProcessing {
 	using UnityEngine;
-	
+
+	/**
+	 * Special datastructure for storing binary images.
+	 * Instead of storing colors, boolean values are stored.
+	 * A boolean true stands for white, false for black.
+	 **/
 	public class BinaryImage {
 		// flattened 2D array containing the image left to right, bottom to top
 		private bool[] pixels;
@@ -42,13 +47,20 @@ namespace UnityImageProcessing {
 				height = value;
 			}
 		}
-		
+
+		/**
+		 * Create a new BinaryImage
+		 **/
 		public BinaryImage(bool[] pixels, int width, int height) {
 			this.pixels = pixels;
 			this.width = width;
 			this.height = height;
 		}
-		
+
+		/**
+		 * Generate a binary image from a given image.
+		 * All completely black pixels will be black, all other pixels will be white
+		 **/
 		public static BinaryImage FromImage(Image image) {
 			bool[] binImage = new bool[image.Pixels.Length];
 
@@ -64,6 +76,9 @@ namespace UnityImageProcessing {
 			return new BinaryImage (binImage, image.Width, image.Height);
 		}
 
+		/**
+		 * Convert a BinaryImage to an Image object, storing the rgb values for black and white
+		 **/
 		public Image GetImage() {
 			Color32[] image = new Color32[pixels.Length];
 
@@ -80,7 +95,11 @@ namespace UnityImageProcessing {
 
 			return new Image(image, width, height);
 		}
-		
+
+		/**
+		 * Get the value of a pixel in the BinaryImage.
+		 * Assumes a coordinate system where the upper left corner of the image is (0, 0).
+		 **/
 		public bool getPixel(int x, int y) {
 			// pixels array goes left to right, from bottom to top
 			int rowLength = width;
@@ -92,6 +111,10 @@ namespace UnityImageProcessing {
 			return pixels [arrayPosition];
 		}
 
+		/**
+		 * Set the value of a pixel in the BinaryImage.
+		 * Assumes a coordinate system where the upper left corner of the image is (0, 0).
+		 **/
 		public void setPixel(int x, int y, bool value) {
 			// pixels array goes left to right, from bottom to top
 			int rowLength = width;
@@ -103,7 +126,10 @@ namespace UnityImageProcessing {
 			pixels [arrayPosition] = value;
 		}
 
-
+		/**
+		 * Invert the binary image.
+		 * This function will return a new BinaryImage and will not change the current object
+		 **/
 		public BinaryImage invert() {
 			bool[] inverted = new bool[pixels.Length];
 

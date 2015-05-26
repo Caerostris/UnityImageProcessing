@@ -9,7 +9,7 @@ namespace UnityImageProcessing {
 	using System;
 
 	/**
-	 * Filter which conerts an image to Grayscale using the <b>average</b> method.
+	 * Filter which converts an image to Grayscale using the <b>average</b> method.
 	 * http://www.johndcook.com/blog/2009/08/24/algorithms-convert-color-grayscale/
 	 **/
 	public class GrayscaleFilter {
@@ -17,6 +17,10 @@ namespace UnityImageProcessing {
 		private static float gWeight = 0.5870f;
 		private static float bWeight = 0.1140f;
 
+		/**
+		 * Applies an <i>average</i> grayscale filter to the given image.
+		 * All transformations will be performed on the original image and no copy will be created
+		 **/
 		public static Image ApplyInPlace(Image image) {
 			// for each pixel
 			for (int i = 0; i < image.Pixels.Length; i++) {
@@ -26,6 +30,10 @@ namespace UnityImageProcessing {
 			return image;
 		}
 
+		/**
+		 * Applies an <i>average</i> grayscale filter to the given image.
+		 * All transformations will be performed on a copy of the image. The original image will not be altered.
+		 **/
 		public static Image Apply(Image image) {
 			Color32[] newPixels = new Color32 [image.Pixels.Length];
 

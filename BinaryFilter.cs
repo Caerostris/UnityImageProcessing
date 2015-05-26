@@ -7,6 +7,9 @@
 namespace UnityImageProcessing {
 	using UnityEngine;
 
+	/**
+	 * Turns an image into an image which only contains black (rgb(0, 0, 0)) or white (rgb(255, 255, 255)) pixels
+	 **/
 	public class BinaryFilter {
 		private byte thresholdValue;
 
@@ -24,6 +27,10 @@ namespace UnityImageProcessing {
 			this.thresholdValue = thresholdValue;
 		}
 
+		/**
+		 * Transform an image to a binary image.
+		 * The transformation will overwrite the image passed as parameter.
+		 **/
 		public Image ApplyInPlace(Image image) {
 			// for each pixel
 			for (int i = 0; i < image.Pixels.Length; i++) {
@@ -33,6 +40,10 @@ namespace UnityImageProcessing {
 			return image;
 		}
 
+		/**
+		 * Transform an image to a binary image.
+		 * The transformation will return a new image.
+		 **/
 		public Image Apply(Image image) {
 			Color32[] newPixels = new Color32[image.Pixels.Length];
 			

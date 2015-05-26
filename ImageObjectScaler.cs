@@ -9,6 +9,10 @@ namespace UnityImageProcessing
 	using System;
 	using UnityEngine;
 
+	/**
+	 * This filter will scale all pixels found in a BinaryImage <b>up</b>
+	 * by a given amount by simply adding more pixels around every white pixel in the image
+	 **/
 	public class ImageObjectScaler
 	{
 		private int halfStrokeWidth;
@@ -28,6 +32,10 @@ namespace UnityImageProcessing
 			StrokeWidth = strokeWidth;
 		}
 
+		/**
+		 * Apply the filter to a given BinaryImage.
+		 * All transformations will be done on a copy of the image and the original image will not be altered.
+		 **/
 		public BinaryImage Apply(BinaryImage image) {
 			BinaryImage newImage = new BinaryImage (new bool[image.Pixels.Length], image.Width, image.Height);
 

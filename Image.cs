@@ -7,6 +7,9 @@
 namespace UnityImageProcessing {
 	using UnityEngine;
 
+	/**
+	 * Data structure for storing an image created from a Texture2D or a WebCamTexture in Unity
+	 **/
 	public class Image {
 		// flattened 2D array containing the image left to right, bottom to top
 		private Color32[] pixels;
@@ -43,20 +46,32 @@ namespace UnityImageProcessing {
 			}
 		}
 
+		/**
+		 * Create a new Image given a Color32 array, image width, and image height
+		 **/
 		public Image(Color32[] pixels, int width, int height) {
 			this.pixels = pixels;
 			this.width = width;
 			this.height = height;
 		}
 
+		/**
+		 * Create a new Image given a WebCamTexture
+		 **/
 		public static Image FromWebCamTexture(WebCamTexture tex) {
 			return new Image (tex.GetPixels32 (), tex.width, tex.height);
 		}
 
+		/**
+		 * Create a new Image given a Texture2D
+		 **/
 		public static Image FromTexture2D(Texture2D tex) {
 			return new Image (tex.GetPixels32 (), tex.width, tex.height);
 		}
 
+		/**
+		 * Convert the Image to a Texture2D
+		 **/
 		public Texture2D GetTexture2D() {
 			Texture2D tex2d = new Texture2D(width, height);
 			tex2d.SetPixels32 (pixels);
@@ -64,6 +79,10 @@ namespace UnityImageProcessing {
 			return tex2d;
 		}
 
+		/**
+		 * Get a pixel of the image.
+		 * Assumes a coordinate system where the upper left corner of the image is (0, 0)
+		 **/
 		public Color32 getPixel(int x, int y) {
 			// pixels array goes left to right, from bottom to top
 			int rowLength = width;
@@ -75,6 +94,10 @@ namespace UnityImageProcessing {
 			return pixels [arrayPosition];
 		}
 
+		/**
+		 * Set a pixel of the image
+		 * Assumes a coordinate system where the upper left corner of the image is (0, 0)
+		 **/
 		public void setPixel(int x, int y, Color32 value) {
 			// pixels array goes left to right, from bottom to top
 			int rowLength = width;

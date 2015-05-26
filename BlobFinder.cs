@@ -47,6 +47,9 @@ namespace UnityImageProcessing {
 		}
 	}
 
+	/**
+	 * Finds blobs of color in an image.
+	 **/
 	public class BlobFinder {
 		private int minWidth = 0;
 		private int minHeight = 0;
@@ -71,6 +74,11 @@ namespace UnityImageProcessing {
 			}
 		}
 
+		/**
+		 * Process the image passed as parameter.
+		 * This function draws a rectangle around every blob it can find.
+		 * It returns an array of rectangles
+		 **/
 		public Rectangle[] Process(Image image) {
 			List<Rectangle> rectangles = new List<Rectangle> ();
 
@@ -103,27 +111,28 @@ namespace UnityImageProcessing {
 			return rectangles.ToArray ();
 		}
 
+		/**
+		 * Uses a breadth-first search in order to get the rectangle around a blob given a coordinate in the blob
+		 **/
 		private Rectangle expandBlob(Image image, Coordinate startingPoint) {
-			Color32[] debImgP = new Color32[image.Pixels.Length];
-			for (int i = 0; i < debImgP.Length; i++) {
-				debImgP [i] = new Color32 (0, 0, 0, 1);
-			}
-			Image debImg = new Image (debImgP, image.Width, image.Height);
-
+			// create a BinaryImage in order to store which points we have checked already
 			bool[] bin = new bool[image.Pixels.Length];
 			for (int i = 0; i < bin.Length; i++) {
 				bin [i] = false;
 			}
-
 			BinaryImage binaryMap = new BinaryImage (bin, image.Width, image.Height);
+
 			Rectangle blob = new Rectangle (startingPoint.X, startingPoint.Y, startingPoint.X, startingPoint.Y);
 			List<Coordinate> pointsToCheck = new List<Coordinate> ();
 
+			// start by expanding in all directions from the starting point
 			pointsToCheck = getUnseenWhiteAdjacentPixels (startingPoint, image, binaryMap);
 
+			// keep expanding from every single point in the list until we can't expand any further
 			while (pointsToCheck.Count > 0) {
 				List<Coordinate> newPointsToCheck = new List<Coordinate> ();
 
+				// check if this point can expand the rectangle and update it if so
 				foreach(Coordinate pointToCheck in pointsToCheck) {
 					if (pointToCheck.X < blob.TopLeftX) {
 						blob.TopLeftX = pointToCheck.X;
@@ -136,7 +145,7 @@ namespace UnityImageProcessing {
 						blob.BottomRightY = pointToCheck.Y;
 					}
 
-					debImg.setPixel(pointToCheck.X, pointToCheck.Y, new Color32(255, 0, 0, 1));
+					// expand from this point
 					List<Coordinate> adjacent = getUnseenWhiteAdjacentPixels (pointToCheck, image, binaryMap);
 					newPointsToCheck.AddRange (adjacent);
 				}

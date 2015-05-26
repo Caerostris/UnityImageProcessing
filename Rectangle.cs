@@ -7,6 +7,9 @@
 namespace UnityImageProcessing {
 	using UnityEngine;
 
+	/**
+	 * Data structe for a rectangle.
+	 **/
 	public class Rectangle {
 		private int topLeftX;
 		private int topLeftY;
@@ -93,6 +96,10 @@ namespace UnityImageProcessing {
 			}
 		}
 
+		/**
+		 * Create a new rectangle given two points on the plane.
+		 * Assumes a coordinate system where (0, 0) is the upper left corner.
+		 **/
 		public Rectangle(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY) {
 			this.topLeftX = topLeftX;
 			this.topLeftY = topLeftY;
@@ -100,6 +107,9 @@ namespace UnityImageProcessing {
 			this.bottomRightY = bottomRightY;
 		}
 
+		/**
+		 * Checks whether the rectangle contains a coordinate.
+		 **/
 		public bool ContainsCoordinate(int x, int y) {
 			if (x >= topLeftX && x <= bottomRightX && y >= topLeftY && y <= bottomRightY) {
 				return true;
@@ -108,6 +118,10 @@ namespace UnityImageProcessing {
 			return false;
 		}
 
+		/**
+		 * Draws the shape of the rectangle onto an image.
+		 * No copy will be created and the original image will be modified.
+		 **/
 		public Image drawInPlace(Image image) {
 			// draw upper & lower border
 			for (int x = TopLeftX; x <= bottomRightX; x++) {
