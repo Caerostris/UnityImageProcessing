@@ -5,6 +5,7 @@
  */
 
 namespace UnityImageProcessing {
+	using System;
 	using UnityEngine;
 
 	/**
@@ -78,21 +79,33 @@ namespace UnityImageProcessing {
 			}
 		}
 
-		public int GetWidth {
+		public int Width {
 			get {
 				return bottomRightY - topLeftY;
 			}
 		}
 
-		public int GetHeight {
+		public int Height {
 			get {
 				return bottomRightX - topLeftX;
 			}
 		}
 
-		public int GetSurfaceArea {
+		public int SurfaceArea {
 			get {
-				return GetHeight * GetWidth;
+				return Height * Width;
+			}
+		}
+
+		public int MidPointX {
+			get {
+				return topLeftX + (int)Math.Round (Width / 2.0, MidpointRounding.AwayFromZero);
+			}
+		}
+
+		public int MidPointY {
+			get {
+				return bottomRightY + (int)Math.Round (Height / 2.0, MidpointRounding.AwayFromZero);
 			}
 		}
 

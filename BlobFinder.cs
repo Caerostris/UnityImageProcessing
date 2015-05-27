@@ -107,7 +107,7 @@ namespace UnityImageProcessing {
 			}
 
 			// check if it has minHeight and minWidth
-			rectangles.RemoveAll (blob => blob.GetHeight < minHeight || blob.GetWidth < minWidth);
+			rectangles.RemoveAll (blob => blob.Height < minHeight || blob.Width < minWidth);
 			return rectangles.ToArray ();
 		}
 
