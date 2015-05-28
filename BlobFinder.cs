@@ -101,6 +101,7 @@ namespace UnityImageProcessing {
 						Rectangle blob = expandBlob(image, coordinate);
 						if(blob != null) {
 							rectangles.Add(blob);
+							Debug.Log ("Found blob " + blob.TopLeftX + " " + blob.TopLeftY + " " + blob.BottomRightX + " " + blob.BottomRightY);
 						}
 					}
 				}
@@ -139,9 +140,9 @@ namespace UnityImageProcessing {
 					} else if(pointToCheck.X > blob.BottomRightX) {
 						blob.BottomRightX = pointToCheck.X;
 					}
-					if(pointToCheck.Y < blob.TopLeftY) {
+					if(pointToCheck.Y > blob.TopLeftY) {
 						blob.TopLeftY = pointToCheck.Y;
-					} else if(pointToCheck.Y > blob.BottomRightY) {
+					} else if(pointToCheck.Y < blob.BottomRightY) {
 						blob.BottomRightY = pointToCheck.Y;
 					}
 

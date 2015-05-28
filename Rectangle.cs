@@ -81,13 +81,13 @@ namespace UnityImageProcessing {
 
 		public int Width {
 			get {
-				return bottomRightY - topLeftY;
+				return bottomRightX - topLeftX;
 			}
 		}
 
 		public int Height {
 			get {
-				return bottomRightX - topLeftX;
+				return topLeftY - bottomRightY;
 			}
 		}
 
@@ -124,7 +124,7 @@ namespace UnityImageProcessing {
 		 * Checks whether the rectangle contains a coordinate.
 		 **/
 		public bool ContainsCoordinate(int x, int y) {
-			if (x >= topLeftX && x <= bottomRightX && y >= topLeftY && y <= bottomRightY) {
+			if (x >= topLeftX && x <= bottomRightX && y >= bottomRightY && y <= topLeftY) {
 				return true;
 			}
 
@@ -153,7 +153,7 @@ namespace UnityImageProcessing {
 			}
 
 			// draw left & right border
-			for (int y = TopLeftY; y <= bottomRightY; y++) {
+			for (int y = TopLeftY; y >= bottomRightY; y--) {
 				for(int xShift = 0; xShift < strokeWidth; xShift++) {
 					int upperX = topLeftX + xShift;
 					int lowerX = bottomRightX + xShift;
