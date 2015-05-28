@@ -101,7 +101,6 @@ namespace UnityImageProcessing {
 						Rectangle blob = expandBlob(image, coordinate);
 						if(blob != null) {
 							rectangles.Add(blob);
-							Debug.Log ("Found blob " + blob.TopLeftX + " " + blob.TopLeftY + " " + blob.BottomRightX + " " + blob.BottomRightY);
 						}
 					}
 				}
